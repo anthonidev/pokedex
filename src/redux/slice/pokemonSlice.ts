@@ -6,7 +6,7 @@ import { Pokemon, PokemonState } from "../../types/interface";
 const initialState: PokemonState = {
     count: 0,
     next: null,
-    preview: null,
+    previous: null,
     results: null
 }
 
@@ -25,7 +25,7 @@ export const pokemonSlice = createSlice({
         pokemons_ok: (state, action: PayloadAction<PokemonState>) => {
             state.count = action.payload.count
             state.next = action.payload.next
-            state.preview = action.payload.preview
+            state.previous = action.payload.previous
             state.results = action.payload.results
         },
         pokemon_ok: (state, action: PayloadAction<Pokemon[]>) => {

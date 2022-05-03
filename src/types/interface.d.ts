@@ -7,6 +7,6 @@ export interface Pokemon {
 export interface PokemonState {
     count: number
     next: string | null
-    preview: string | null
+    previous: string | null
     results: Pokemon[] | null
 }

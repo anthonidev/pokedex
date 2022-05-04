@@ -6,7 +6,10 @@ function Navbar() {
         <nav className="bg-blue-600 w-full h-14 p-2 sticky top-0">
             <ul className="flex items-center max-w-7xl mx-auto justify-between">
                 <li className="text-yellow-400 text-3xl font-extrabold tracking-widest">
-                    POKEDEX
+                    <Link href="/">
+                        <a >POKEDEX</a>
+                    </Link>
+
                 </li>
                 <li className=" text-white hover:text-yellow-400 ">
                     <Link href="/collection">

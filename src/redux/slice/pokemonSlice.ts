@@ -7,7 +7,9 @@ const initialState: PokemonState = {
     count: 0,
     next: null,
     previous: null,
-    results: null
+    results: null,
+    collection:null
+    
 }
 
 export const pokemonSlice = createSlice({
@@ -30,13 +32,17 @@ export const pokemonSlice = createSlice({
         },
         pokemon_ok: (state, action: PayloadAction<Pokemon[]>) => {
             state.results  = action.payload
+        },
+        pokemon_add: (state, action: PayloadAction<Pokemon[]>) => {
+            localStorage.setItem('collection', JSON.stringify(action.payload));
+            state.collection  = action.payload
         }
     }
 });
 
 
 export const {
-    pokemons_ok
+    pokemons_ok,pokemon_add
 } = pokemonSlice.actions
 
 

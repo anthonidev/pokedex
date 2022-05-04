@@ -1,16 +1,15 @@
-export interface Pokemon {
-    name: string
-    url: string
-    image:string
-}
-
 export interface PokemonState {
     count: number
     next: string | null
     previous: string | null
     results: Pokemon[] | null
+    collection:Pokemon[]|null
 }
 
+export interface Pokemon {
+    name: string
+    url: string
+}
 
 export interface PokemonDetail {
     sprites: Sprites
@@ -20,6 +19,7 @@ export interface PokemonDetail {
     }
     stats:Stats[]
 }
+
 export interface Stats {
     base_stat:number
     stat:{
@@ -41,7 +41,11 @@ export interface Language {
 export interface Sprites {
     back_default: string
     front_default: string
-
+    other:{
+        dream_world:{
+            front_default:string
+        }
+    }
 }
 
 export interface Type {

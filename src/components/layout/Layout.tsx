@@ -6,13 +6,8 @@ import Navbar from "../navigation/Navbar";
 
 import { motion } from 'framer-motion';
 import { routeAnimation } from "../../animation/animations";
-type Props = {
-    title: string,
-    content: string,
-    children: (JSX.Element | null),
-}
-const Layout: React.FC<Props> = ({ title, content, children }) => {
 
+const Layout: React.FC<Props> = ({ title, content, children }) => {
 
     return (
         <>

@@ -6,7 +6,15 @@ export const fadeInUp = {
     animate: {
         opacity: 1,
         y: 0
+    },
+    exit: {
+        opacity: 0,
+        transition: {
+            delay: 0.1,
+            ease: "easeInOut",
+        }
     }
+
 }
 
 export const stagger = {

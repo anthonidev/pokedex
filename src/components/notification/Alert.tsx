@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion';
 import { RootState } from '../../redux/configureStore';
-import { fadeInUp, stagger } from '../../animation/animations';
+import { fadeInUp, stagger } from '../../utils/animation/animations';
 
 const Alert = () => {
     const alert = useSelector((state: RootState) => state.alert);

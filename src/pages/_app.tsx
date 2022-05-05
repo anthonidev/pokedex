@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps ,router}: AppProps) {
   return(
     <Provider store={store}>
     <AnimatePresence exitBeforeEnter>
-      <Component {...pageProps} key={router}/>
+      <Component {...pageProps} key={router.route}/>
     </AnimatePresence>
   </Provider>
   )

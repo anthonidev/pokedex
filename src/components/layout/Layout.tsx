@@ -5,7 +5,7 @@ import Alert from "../notification/Alert";
 import Navbar from "../navigation/Navbar";
 
 import { motion } from 'framer-motion';
-import { routeAnimation } from "../../animation/animations";
+import { routeAnimation } from "../../utils/animation/animations";
 import { get_items } from "../../redux/apis/pokemon";
 import { AppDispatch } from "../../redux/configureStore";
 

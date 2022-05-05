@@ -1,16 +1,16 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { MorePokemonDetail, Pokemon, PokemonDetail, Type } from '../../types/interface'
+import { MorePokemonDetail, Pokemon, PokemonDetail, Type } from '../../utils/types/interface'
 import { CgPokemon } from 'react-icons/cg';
-import { fadeInUp, stagger } from '../../animation/animations';
+import { fadeInUp, stagger } from '../../utils/animation/animations';
 import { motion } from 'framer-motion';
 import CardDetail from './CardDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_item } from '../../redux/apis/pokemon';
-import { RootState } from '../../redux/configureStore';
+import { AppDispatch, RootState } from '../../redux/configureStore';
 
+import { Oval } from 'react-loader-spinner'
 
-
-
+const delay = 5;
 
 const CardPokemon: FunctionComponent<{
     pokemon: Pokemon
@@ -21,36 +21,26 @@ const CardPokemon: FunctionComponent<{
     url
 }, showDetail,
     setShowDetail }) => {
-        const dispatch: any = useDispatch()
+        const dispatch: AppDispatch = useDispatch()
 
         const [pokemonCard, setPokemonCard] = useState<PokemonDetail>()
         const [morePokemonCard, setMorePokemonCard] = useState<MorePokemonDetail>()
-        const [loading, setLoading] = useState(true)
-        const [error, setError] = useState(false)
-
         const [addCollection, setAddCollection] = useState(false)
         const pokemons = useSelector((state: RootState) => state.prokemon.collection);
-
-
+        const [show, setShow] = useState(false);
 
         useEffect(() => {
+            let timer1 = setTimeout(() => setShow(true), delay * 1000);
             const found = pokemons?.find(element => element.url === url);
-            if (found) {
-                setAddCollection(true)
-            }else{
-                setAddCollection(false)
-
-            }
+            found ? setAddCollection(true) : setAddCollection(false)
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
                     setPokemonCard(data)
-                    setLoading(false)
-                    setError(false)
+                    clearTimeout(timer1);
                 })
                 .catch(err => {
-                    setLoading(false)
-                    setError(true)
+                    console.log(err);
                 })
         }, [url, pokemons])
 
@@ -60,61 +50,63 @@ const CardPokemon: FunctionComponent<{
                     .then(res => res.json())
                     .then(data => {
                         setMorePokemonCard(data)
-                        setLoading(false)
-                        setError(false)
                     })
                     .catch(err => {
-                        setLoading(false)
-                        setError(true)
+                        console.log(err);
                     })
             }
         }, [pokemonCard])
 
-
         const addPokemon = (name: string, url: string) => {
             dispatch(add_item({ name: name, url: url }))
         }
-
         return (
-            <div className="bg-white flex flex-col justify-center items-center px-5 rounded-md shadow  py-2 ">
+            <motion.div
+                className="bg-white flex flex-col justify-center items-center px-5 rounded-md shadow  py-2 "
+                variants={stagger}
+                initial="initial"
+                animate="animate"
+            >
                 <div className="flex justify-between  w-full">
 
                     <ul className="flex space-x-2 items-center justify-center">
-
-
                         {pokemonCard && pokemonCard.types.map((type: Type, index) => (
-                            <li key={index} className="bg-blue-600 text-white py-1 rounded-full text-xs px-2 " >
+                            <motion.li variants={fadeInUp} key={index} className="bg-blue-600 text-white py-1 rounded-full text-xs px-2 " >
                                 {type.type.name}
-                            </li>
+                            </motion.li>
                         ))}
-
-
                     </ul>
-                    <button
+
+                    <motion.button
+                        whileHover={{ scale: 1.2, rotate: 90 }}
                         onClick={() => addPokemon(name, url)}
                         className={` hover:bg-yellow-500 text-white  rounded-full text-xs ${addCollection ? "bg-yellow-400" : "bg-blue-500"}`}
                     >
                         <CgPokemon className="h-6 w-6" />
-                    </button>
+                    </motion.button>
+
                 </div>
 
                 {
-                    pokemonCard && (
-                        <div className="flex cursor-pointer" onClick={() => setShowDetail(url)}>
+                    pokemonCard && !show ? (
+                        <motion.div variants={fadeInUp} className="flex cursor-pointer" onClick={() => setShowDetail(url)}>
                             <img src={pokemonCard.sprites.front_default} alt={name} className="h-36 w-36" />
-
-                        </div>
-
-                    )
+                        </motion.div>
+                    ) : (<Oval
+                        height="100"
+                        width="100"
+                        color='grey'
+                        ariaLabel='loading'
+                    />)
                 }
 
-                <h1 className="text-xl uppercase tracking-wider font-semibold text-indigo-600 border-t pt-2 ">{name}</h1>
+                <motion.h1 variants={fadeInUp} className="text-xl uppercase tracking-wider font-semibold text-indigo-600 border-t pt-2 ">{name}</motion.h1>
                 {
                     morePokemonCard && pokemonCard && showDetail === url && (
                         <CardDetail pokemonCard={pokemonCard} morePokemonCard={morePokemonCard} name={name} setShowDetail={setShowDetail} />
                     )
                 }
-            </div>
+            </motion.div>
         )
     }
 

@@ -5,48 +5,80 @@ import CardPokemon from '../components/elements/CardPokemon'
 import Layout from '../components/layout/Layout'
 import { get_pokemons, get_pokemon_pages } from '../redux/apis/pokemon'
 import { AppDispatch, RootState } from '../redux/configureStore'
-import { Pokemon } from '../types/interface'
+import { Pokemon } from '../utils/types/interface'
+import { motion } from 'framer-motion';
 
 import { BsCaretLeftSquareFill, BsCaretRightSquareFill } from 'react-icons/bs'
+import { fadeInUp, routeAnimation, stagger } from '../utils/animation/animations'
+import { Grid,  } from 'react-loader-spinner'
 
 const Home: NextPage = () => {
+  let timer1 = setTimeout(() => setRender(true), 500)
 
   const dispatch: AppDispatch = useDispatch()
   const previous = useSelector((state: RootState) => state.prokemon.previous);
   const next = useSelector((state: RootState) => state.prokemon.next);
   const pokemons = useSelector((state: RootState) => state.prokemon.results);
   const [showDetail, setShowDetail] = useState<string | null>(null)
-
+  const [render, setRender] = useState(false)
 
   useEffect(() => {
     dispatch(get_pokemons())
+    return () => {
+      clearTimeout(timer1)
+    }
   }, [dispatch])
 
   function nextPage(next: string) {
+
+    setRender(false)
     dispatch(get_pokemon_pages(next))
     window.scrollTo(0, 0);
+    return () => {
+      clearTimeout(timer1)
+    }
+
   }
 
   function previousPage(previous: string) {
+    setRender(false)
     dispatch(get_pokemon_pages(previous))
     window.scrollTo(0, 0);
+    return () => {
+      clearTimeout(timer1)
+    }
 
   }
 
   return (
     <Layout title="Pokedex " content="pokedex by anthoni" >
-      <div className="max-w-7xl mx-auto  ">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-10 pt-10 p-2">
+      <motion.div variants={routeAnimation} initial="initial" animate="animate" exit="exit" className="max-w-7xl mx-auto  ">
+        <motion.div
+          variants={stagger}
+          initial="initial"
+          animate="animate"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-10 pt-10 p-2">
+
           {
-            pokemons?.map((pokemon: Pokemon, index) => (
-              <div key={index}>
+            render && pokemons?.map((pokemon: Pokemon, index) => (
+              <motion.div variants={fadeInUp} key={index}>
                 <CardPokemon pokemon={pokemon} showDetail={showDetail} setShowDetail={setShowDetail} />
 
-              </div>
+              </motion.div>
             ))
           }
 
-        </div>
+        </motion.div>
+        {!render && (
+          <div className="flex justify-center items-center w-full ">
+            <Grid
+              height="200"
+              width="200"
+              color='blue'
+              ariaLabel='loading'
+            />
+          </div>
+        )}
         <div className="2xl:hidden p-2 fixed bg-white w-full bottom-0 border-t rounded-t-xl ">
           <div className="flex justify-center space-x-5  ">
 
@@ -80,7 +112,7 @@ const Home: NextPage = () => {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </Layout>
   )
 }

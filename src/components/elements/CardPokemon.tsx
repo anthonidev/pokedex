@@ -73,7 +73,7 @@ const CardPokemon: FunctionComponent<{
 
                     <ul className="flex space-x-2 items-center justify-center">
                         {pokemonCard && pokemonCard.types.map((type: Type, index) => (
-                            <motion.li variants={fadeInUp} key={index} className="bg-blue-600 text-white py-1 rounded-full text-xs px-2 " >
+                            <motion.li variants={fadeInUp} key={index} className="bg-gray-200 text-dark py-1 rounded-full text-xs px-2 " >
                                 {type.type.name}
                             </motion.li>
                         ))}

@@ -7,7 +7,7 @@ function Navbar() {
             <ul className="flex items-center max-w-7xl mx-auto justify-between">
                 <li className="text-yellow-400 text-3xl font-extrabold tracking-widest">
                     <Link href="/">
-                        <a >POKEDEX</a>
+                        <a  className="font-marker">POKEDEX</a>
                     </Link>
 
                 </li>

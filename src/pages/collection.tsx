@@ -7,6 +7,7 @@ import { get_items } from '../redux/apis/pokemon'
 import { AppDispatch, RootState } from '../redux/configureStore'
 import { Pokemon } from '../utils/types/interface'
 import { motion } from 'framer-motion';
+import Link from 'next/link'
 
 const Collection = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -22,13 +23,17 @@ const Collection = () => {
         <motion.div variants={stagger}
           initial="initial"
           animate="animate" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-10 pt-10 p-2">
+         
           {
-            pokemons?.map((pokemon: Pokemon, index) => (
-              <motion.div variants={fadeInUp} key={index}>
-                <CardPokemon pokemon={pokemon} showDetail={showDetail} setShowDetail={setShowDetail} />
-
-              </motion.div>
-            ))
+            pokemons?.length == 0 ? (
+              <div className="flex flex-col justify-center items-center col-span-full space-y-8">
+                <h1 className="text-blue-600 text-2xl font-semibold text-center">No tienes pokemones en tu colección</h1>
+                <Link href="/"><a className="bg-blue-500 p-3 rounded-md hover:bg-blue-700 text-center text-yellow-400 font-extrabold tracking-widest " >Agregar Pokemones</a></Link>
+              </div>) : (pokemons?.map((pokemon: Pokemon, index) => (
+                <motion.div variants={fadeInUp} key={index}>
+                  <CardPokemon pokemon={pokemon} showDetail={showDetail} setShowDetail={setShowDetail} />
+                </motion.div>
+              )))
           }
         </motion.div>
       </motion.div>

@@ -9,6 +9,7 @@ import { add_item } from '../../redux/apis/pokemon';
 import { AppDispatch, RootState } from '../../redux/configureStore';
 
 import { Oval } from 'react-loader-spinner'
+import Image from 'next/image';
 
 const delay = 5;
 
@@ -59,6 +60,7 @@ const CardPokemon: FunctionComponent<{
 
         const addPokemon = (name: string, url: string) => {
             dispatch(add_item({ name: name, url: url }))
+            
         }
         return (
             <motion.div
@@ -90,7 +92,7 @@ const CardPokemon: FunctionComponent<{
                 {
                     pokemonCard && !show ? (
                         <motion.div variants={fadeInUp} className="flex cursor-pointer" onClick={() => setShowDetail(url)}>
-                            <img src={pokemonCard.sprites.front_default} alt={name} className="h-36 w-36" />
+                            <Image src={pokemonCard.sprites.front_default} alt={name} width={120} height={120} quality={70} priority layout="intrinsic"/>
                         </motion.div>
                     ) : (<Oval
                         height="100"

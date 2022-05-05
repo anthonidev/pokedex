@@ -60,7 +60,6 @@ export const imagesUp = {
         x: -160,
         scale: 2
 
-
     },
     animate: {
         scale: 1,
@@ -76,7 +75,6 @@ export const imagesUp = {
     //     height: { delay: 0, duration: 0.4 },
     //     opacity: { delay: 0.5, duration: 0.4 }
     // },
-
 
 }
 

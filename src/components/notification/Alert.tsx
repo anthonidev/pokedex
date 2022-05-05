@@ -11,8 +11,16 @@ const Alert = () => {
             switch (alert.type) {
                 case 'green':
                     return (
-                        <motion.div variants={stagger} initial="initial" animate="animate" className="fixed bottom-2 z-50 w-1/2 flex flex-row items-center bg-green-200 p-5 rounded border-b-2 border-green-300  ">
-                            <motion.div variants={fadeInUp} className=" flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
+                        <motion.div
+                            variants={stagger}
+                            initial="initial"
+                            animate="animate"
+                            className="fixed top-14 z-50 w-full md:w-1/2 flex flex-row items-center bg-green-200 p-5 rounded border-b-2 right-0 border-green-300  "
+                        >
+                            <motion.div
+                                variants={fadeInUp}
+                                className=" flex items-center bg-green-100 border-2 border-green-500 justify-center h-10 w-10 flex-shrink-0 rounded-full"
+                            >
                                 <span className="text-green-500">
                                     <svg fill="currentColor"
                                         viewBox="0 0 20 20"
@@ -24,10 +32,10 @@ const Alert = () => {
                                 </span>
                             </motion.div>
                             <motion.div variants={fadeInUp} className="alert-content ml-6">
-                                <div className="alert-title font-semibold text-lg text-green-800">
+                                <div className=" font-semibold text-lg text-green-800">
                                     Correcto
                                 </div>
-                                <div className="alert-description text-sm text-green-600">
+                                <div className=" text-sm text-green-600">
                                     {alert.msg}
                                 </div>
                             </motion.div>
@@ -35,7 +43,11 @@ const Alert = () => {
                     )
                 case 'yellow':
                     return (
-                        <motion.div variants={stagger} initial="initial" animate="animate" className="fixed bottom-2 z-50 w-1/2 flex flex-row items-center bg-yellow-200 p-5 rounded border-b-2 border-yellow-300">
+                        <motion.div 
+                        variants={stagger} 
+                        initial="initial" 
+                        animate="animate" 
+                        className="fixed top-14 left-0 z-50 w-full md:w-1/2 flex flex-row items-center bg-yellow-200 p-5 rounded border-b-2 border-yellow-300">
                             <motion.div variants={fadeInUp} className=" flex items-center bg-yellow-100 border-2 border-yellow-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
                                 <span className="text-yellow-500">
                                     <svg fill="currentColor"
@@ -57,7 +69,6 @@ const Alert = () => {
                             </motion.div>
                         </motion.div>
                     )
-                
             }
 
         } else {

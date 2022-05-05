@@ -2,6 +2,7 @@ import axios from "axios";
 import { Pokemon } from "../../utils/types/interface";
 import { AppDispatch } from "../configureStore";
 import { pokemons_ok, pokemon_add } from '../slice/pokemonSlice';
+import { setAlert } from "./alert";
 
 export const get_pokemons = () => async (dispatch: AppDispatch) => {
     await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/v2/pokemon/`)
@@ -33,8 +34,11 @@ export const add_item = (item: Pokemon) => async (dispatch: AppDispatch) => {
         if (shouldAddItem) {
             collection?.push(item)
             dispatch(pokemon_add(collection));
+            dispatch(setAlert("Pokemon agregado a la coleccion","green"))
         } else {
             dispatch(remove(collection, item))
+            dispatch(setAlert("Pokemon eliminado de la coleccion","yellow"))
+
         }
 
     } else {

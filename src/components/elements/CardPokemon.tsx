@@ -12,7 +12,6 @@ import { Oval } from 'react-loader-spinner'
 import Image from 'next/image';
 
 const delay = 5;
-
 const CardPokemon: FunctionComponent<{
     pokemon: Pokemon
     showDetail: null | string,
@@ -60,7 +59,6 @@ const CardPokemon: FunctionComponent<{
 
         const addPokemon = (name: string, url: string) => {
             dispatch(add_item({ name: name, url: url }))
-            
         }
         return (
             <motion.div

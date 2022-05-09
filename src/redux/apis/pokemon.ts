@@ -9,7 +9,7 @@ export const get_pokemons = () => async (dispatch: AppDispatch) => {
         .then(res => {
             dispatch(pokemons_ok(res.data))
         })
-        .catch(err => { console.log(err) })
+        .catch(err => { console.error(err) })
 }
 
 export const get_pokemon_pages = (url: string) => async (dispatch: AppDispatch) => {
@@ -17,7 +17,7 @@ export const get_pokemon_pages = (url: string) => async (dispatch: AppDispatch) 
         .then(res => {
             dispatch(pokemons_ok(res.data))
         })
-        .catch(err => { console.log("error") })
+        .catch(err => { console.error(err) })
 }
 
 export const add_item = (item: Pokemon) => async (dispatch: AppDispatch) => {

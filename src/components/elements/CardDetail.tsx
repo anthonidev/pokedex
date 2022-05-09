@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { MdClose } from 'react-icons/md'
-import { Language, MorePokemonDetail, PokemonDetail, Type } from '../../utils/types/interface'
+import {  MorePokemonDetail, PokemonDetail } from '../../utils/types/interface'
 import { motion } from 'framer-motion';
 import HeaderCard from './HeaderCard';
 import CardImage from './CardImage';
@@ -25,10 +25,10 @@ const CardDetail: FunctionComponent<{
                     left: 0,
                 }}
                 whileHover={{ scale: 1.1 }}
-                dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-                dragElastic={0.5}
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 100 }}
+                dragElastic={0.1}
                 whileTap={{ cursor: "grabbing" }}
-                className="hidden md:block  fixed top-14 z-40 px-5 pb-7 rounded-b-lg left-0 md:right-0 lg:left-1/3  max-w-xl bg-cyan-900 cursor-grab">
+                className="hidden md:block  fixed top-14 z-50 px-5 pb-7 rounded-b-lg left-0 md:right-0 lg:left-1/3  max-w-xl bg-cyan-900 cursor-grab">
 
                 <HeaderCard name={name} pokemonCard={pokemonCard} />
                 <CardImage url={pokemonCard.sprites.other.dream_world.front_default} name={name} />
@@ -44,7 +44,7 @@ const CardDetail: FunctionComponent<{
             <motion.div
                 animate={{ y: [-50, 0] }}
                 transition={{ duration: 0.4, type: 'spring', delay: 0.1 }}
-                className="block md:hidden  fixed top-14 z-40 px-5 pb-7 rounded-b-lg left-0 md:right-0 lg:left-1/3  max-w-xl bg-cyan-900 ">
+                className="block md:hidden  fixed top-14 z-50 px-5 pb-7 rounded-b-lg left-0 md:right-0 lg:left-1/3  max-w-xl bg-cyan-900 ">
 
                 <HeaderCard name={name} pokemonCard={pokemonCard} />
                 <CardImage url={pokemonCard.sprites.other.dream_world.front_default} name={name} />
